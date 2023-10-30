@@ -18,3 +18,7 @@ joker = Film("Joker", 2019, 8.4)
 print(inception)
 print(the_martian)
 print(joker)
+
+
+
+#B) Ble ikke dette gjort i forrige oppgave?
