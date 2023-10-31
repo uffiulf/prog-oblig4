@@ -2,7 +2,7 @@ import random
 
 blackjack = 21
 
-Ace =1
+Ace =11
 Two =2
 Three =3
 Four =4
@@ -23,7 +23,7 @@ Stand = 2
 def create_deck():
     suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
     ranks = [Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Jack, Queen, King]
-    deck = [f"{rank} of {suit}" for x in suits for y in ranks]
+    deck = [f"{rank} of {suit}" for x in suits for y in ranks]  #Blir gjort om til str....
     return deck
 
 #Fjerner kort fra kortstokk etter utdeling
@@ -31,6 +31,13 @@ def deal_card(deck):
     card = random.choice(deck)
     deck.remove(card)
     return card
+
+def change_ace(hand):
+    if sum(hand) > blackjack:
+        for x in hand:
+            if x == Ace:
+                    hand - 10
+                    return hand
 
 
 while True:
@@ -63,6 +70,9 @@ while True:
         action = int(input("Press 1 to hit or 2 to stand"))
         if action == Hit:
             player_hand.append(deal_card(deck))
+           #legg inn funksjon som endrer Ace om summen er over 21
+            player_hand = change_ace(player_hand)
+
             print(f"Your hand is {player_hand}")
             if sum(player_hand) > blackjack:
                 print("You went bust")
@@ -72,8 +82,7 @@ while True:
         else:
             print("Invalid input")
 
-    if sum(player_hand) > blackjack:
-        Ace = 1
+    #Dealerens tur
 
     print(f"The cards have been dealt. Your hand is {player_hand}, with a total value of {sum(player_hand)}")
     if blackjack in player_hand:
