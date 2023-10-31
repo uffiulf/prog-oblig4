@@ -23,7 +23,7 @@ Stand = 2
 def create_deck():
     suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
     ranks = [Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Jack, Queen, King]
-    deck = [f"{rank} of {suit}" for x in suits for y in ranks]  #Blir gjort om til str....
+    deck = [f"{x} of {y}" for x in suits for y in ranks]  #Blir gjort om til str....
     return deck
 
 #Fjerner kort fra kortstokk etter utdeling
@@ -62,12 +62,12 @@ while True:
     dealer_hand.append(deal_card(deck))
 
     #Viser kortene til spiller og dealer (dealer viser bare ett kort)
-    print(f"Your hand is {player_hand}")
-    print(f"Dealer's hand is {dealer_hand[0]}")
+    print(f"Your hand is {player_hand} a total value of {sum(player_hand)}")
+    print(f"Dealer's hand is {dealer_hand[0]} a total value of {sum(dealer_hand)}")
 
     #Spillerens tur
     while True:
-        action = int(input("Press 1 to hit or 2 to stand"))
+        action = int(input("Press 1 to hit or 2 to stand "))
         if action == Hit:
             player_hand.append(deal_card(deck))
            #legg inn funksjon som endrer Ace om summen er over 21
