@@ -34,7 +34,7 @@ def deal_card(deck):
 
 def change_ace(hand):
     if sum(hand) > blackjack:
-        for x in hand:
+        for x in hand[x]:
             if x == Ace:
                     hand - 10
                     return hand
@@ -42,11 +42,11 @@ def change_ace(hand):
 
 while True:
     player = input("Press enter to start a new game")
-    print("You have 100 chips")
+    print(f"You have {chips} chips")
     while True:
-        bet = int(input("How many chips do you want to bet?"))
+        bet = int(input("How many chips do you want to bet? "))
         chips -= bet  #trekker innsatsen fra total chips
-        print(f"You bet {bet} chips of your total {chips} chips")
+        print(f"You bet {bet} chips")
         if bet > chips:
             print("You don't have enough chips")
         else:
