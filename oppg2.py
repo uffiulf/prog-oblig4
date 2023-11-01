@@ -1,41 +1,49 @@
 import random
 
 blackjack = 21
-
-Ace =11
-Two =2
-Three =3
-Four =4
-Five =5
-Six =6
-Seven =7
-Eight =8
-Nine =9
-Jack =10
-Queen =10
-King =10
-
 chips = 100
 Hit = 1
 Stand = 2
 
-#Lager liste med kortstokk
+#Lager dictionary med kortverdier
+def card_values():
+    return {
+        "Ace": 11,
+        "Two": 2,
+        "Three": 3,
+        "Four": 4,
+        "Five": 5,
+        "Six": 6,
+        "Seven": 7,
+        "Eight": 8,
+        "Nine": 9,
+        "Jack": 10,
+        "Queen": 10,
+        "King": 10
+    }
+
+
+#Lager liste med kortstokk, legger suits og ranks i en ny liste deck
 def create_deck():
     suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
-    ranks = [Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Jack, Queen, King]
-    deck = [f"{x} of {y}" for x in suits for y in ranks]  #Blir gjort om til str....
+    ranks = ["Ace", "Two", "Three","Four", "Five", "Six", "Seven", "Eight", "Nine", "Jack", "Queen", "King"]
+    deck = []
+    for x in ranks:
+        for y in suits:
+            deck.append([x,y])    
     return deck
 
-#Fjerner kort fra kortstokk etter utdeling
+#Fjerner kort fra kortstokk etter utdeling 
 def deal_card(deck):
     card = random.choice(deck)
     deck.remove(card)
     return card
 
+
 def change_ace(hand):
     if sum(hand) > blackjack:
-        for x in hand[x]:
-            if x == Ace:
+        for x in hand:
+            if x == "Ace":
                     hand - 10
                     return hand
 
@@ -61,9 +69,13 @@ while True:
     dealer_hand.append(deal_card(deck))
     dealer_hand.append(deal_card(deck))
 
+    print(player_hand)  
+  
+    #player_hand_value = player_hand
+
     #Viser kortene til spiller og dealer (dealer viser bare ett kort)
-    print(f"Your hand is {player_hand} a total value of {sum(player_hand)}")
-    print(f"Dealer's hand is {dealer_hand[0]} a total value of {sum(dealer_hand)}")
+    print(f"Your hand is {player_hand} ")
+    print(f"Dealer's hand is {dealer_hand} ")
 
     #Spillerens tur
     while True:
@@ -71,7 +83,7 @@ while True:
         if action == Hit:
             player_hand.append(deal_card(deck))
            #legg inn funksjon som endrer Ace om summen er over 21
-            player_hand = change_ace(player_hand)
+            player_hand = change_ace(player_hand) 
 
             print(f"Your hand is {player_hand}")
             if sum(player_hand) > blackjack:
