@@ -4,23 +4,24 @@ blackjack = 21
 chips = 100
 Hit = 1
 Stand = 2
+player_hand_value = 0    #summen av kortene til spilleren
+dealer_hand_value = 0    #summen av kortene til dealer
 
-#Lager dictionary med kortverdier
-def card_values():
-    return {
-        "Ace": 11,
-        "Two": 2,
-        "Three": 3,
-        "Four": 4,
-        "Five": 5,
-        "Six": 6,
-        "Seven": 7,
-        "Eight": 8,
-        "Nine": 9,
-        "Jack": 10,
-        "Queen": 10,
-        "King": 10
-    }
+#dictionary med kortverdier
+card_values = {
+    "Ace": 11,
+    "Two": 2,
+    "Three": 3,
+    "Four": 4,
+    "Five": 5,
+    "Six": 6,
+    "Seven": 7,
+    "Eight": 8,
+    "Nine": 9,
+    "Jack": 10,
+    "Queen": 10,
+    "King": 10
+}
 
 
 #Lager liste med kortstokk, legger suits og ranks i en ny liste deck
@@ -43,7 +44,7 @@ def deal_card(deck):
 def change_ace(hand):
     if sum(hand) > blackjack:
         for x in hand:
-            if x == "Ace":
+            if x == Ace:
                     hand - 10
                     return hand
 
@@ -69,13 +70,22 @@ while True:
     dealer_hand.append(deal_card(deck))
     dealer_hand.append(deal_card(deck))
 
-    print(player_hand)  
-  
+    #Fikk hjelp av chatgpt til å lage en funksjon som regner ut summen av kortene til spilleren
+    for x in player_hand:
+        player_hand_value += card_values[x[0]]
+    
+    for x in dealer_hand:
+        dealer_hand_value += card_values[x[0]]
+
+
+
+   # print(player_hand[0])
     #player_hand_value = player_hand
 
     #Viser kortene til spiller og dealer (dealer viser bare ett kort)
-    print(f"Your hand is {player_hand} ")
-    print(f"Dealer's hand is {dealer_hand} ")
+    print(f"Your hand is {player_hand} with a value of {player_hand_value}")
+    #Fikk hjelp av chatgpt å vise verdien av det ene kortet til dealer
+    print(f"The dealers visible card is a {dealer_hand[0]} with a value of {card_values[dealer_hand[0][0]]} ")
 
     #Spillerens tur
     while True:
@@ -95,10 +105,4 @@ while True:
             print("Invalid input")
 
     #Dealerens tur
-
-    print(f"The cards have been dealt. Your hand is {player_hand}, with a total value of {sum(player_hand)}")
-    if blackjack in player_hand:
-        print("You got blackjack!")
-        chips += bet
-        print(f"You now have {chips} chips")
-        continue
+    
