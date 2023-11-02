@@ -40,7 +40,7 @@ print(e)
 
 
 def deal_hand(hand):
-    random.choices(hand)
-    hand.pop()
+    card = random.choice(hand)
+    hand.remove(card)
 
     return hand
