@@ -1,6 +1,12 @@
 import random
 
-#lager kortstokk
+game = True
+player_hand = []
+dealers_hand = []
+chips = 10
+bet = 0 
+
+#lager kortstokk    1
 def fresh_deck():
     a = 1
     kortstokk = []
@@ -14,10 +20,12 @@ def fresh_deck():
             kortstokk.append([y,x])
     return(kortstokk)
 
-#blander kortstokk
+#blander kortstokk    2
 def shuffle_deck(kortstokk):
     random.shuffle(kortstokk)
     return(kortstokk)
+
+
 
 #Chatgpt opprettet denne funksjonen. Konverterer int til str
 def number_to_word(n):
@@ -27,20 +35,47 @@ def number_to_word(n):
     }
     return(num_words.get(n))
 
-fresh_deck()
-shuffle_deck(fresh_deck())
-
-#print(shuffle_deck(fresh_deck()))
-
-e = 0 
-for x in fresh_deck():
-    e += 1
-
-print(e)
 
 
+#Tar et kort og fjerner det fra listen (hand parameter)
 def deal_hand(hand):
     card = random.choice(hand)
     hand.remove(card)
+    return card
 
-    return hand
+
+
+while game:
+    print("---------")
+    print("Blackjack")
+    print("---------")
+    print(" ")
+    print(" ")
+    while game:
+        try:
+            bet = int(input(f"You have {chips} chips, bet to start :"))
+            if bet > chips:
+                print(f"you have only {chips} chips, try again")
+            elif bet != int(bet):
+                print("Only value of integer are allowed")
+            elif bet < 0 or bet == 0:
+                print("No cheating!")
+            else: 
+                break
+        except ValueError:
+               print("Only value of integer are allowed")
+
+    chips -= bet
+    print(f"You betted {bet} and have {chips} left")
+    print(" ")
+    #lager kortstokk
+    fresh_deck()
+    #blander kortstokk
+    deck =  shuffle_deck(fresh_deck())
+    #ferdig blandet kortstokk  
+    #del ut kort
+    print("Cards have been dealt!")
+    player_hand.append(deal_hand(deck))
+    print(f"You got {player_hand} a total value of {number_to_word(player_hand)}")
+    dealers_hand.append(deal_hand(deck))
+    print(f"Dealer got {dealers_hand[0]}")
