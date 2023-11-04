@@ -8,7 +8,7 @@ bet = 0
 
 #lager kortstokk    1
 def fresh_deck():
-    a = 1
+    a = 0
     kortstokk = []
     symboler = ["Hearts", "Diamonds", "Clubs", "Spades"]
     ranks = ["Jack", "Queen", "King"]
@@ -37,11 +37,20 @@ def number_to_word(n):
 
 
 
-#Tar et kort og fjerner det fra listen (hand parameter)
-def deal_hand(hand):
-    card = random.choice(hand)
-    hand.remove(card)
+#Tar et kort og fjerner det fra listen (hand parameter)  , chatgpt her også
+def deal_hand(deck):
+    card = random.choice(deck)
+    deck.remove(card)
     return card
+
+#Returnere verdien 10 om bilder finnes i spillerens kort
+def ranks_value(ranks):
+    ranks = ["Jack", "Queen", "King"]
+    for x in ranks:
+        if x == x:
+            return 10
+        else:
+            None
 
 
 
@@ -73,9 +82,22 @@ while game:
     #blander kortstokk
     deck =  shuffle_deck(fresh_deck())
     #ferdig blandet kortstokk  
+
     #del ut kort
     print("Cards have been dealt!")
     player_hand.append(deal_hand(deck))
-    print(f"You got {player_hand} a total value of {number_to_word(player_hand)}")
+    player_hand.append(deal_hand(deck))
+    print(player_hand[0][0])
+    print(player_hand[1][0])
+  
+    player_value = []
+    player_value.append(player_hand)  #Lager en ny liste for å vise verdiene på kort
+    
+ 
+
+
+    
+  
+    print(f"You got {player} ")
     dealers_hand.append(deal_hand(deck))
     print(f"Dealer got {dealers_hand[0]}")
