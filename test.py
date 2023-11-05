@@ -89,7 +89,12 @@ while game:
     player_hand.append(deal_hand(deck))
     print(player_hand[0][0])
     print(player_hand[1][0])
-  
+    aa = player_hand[0][0]
+    ab = player_hand[1][0]
+    ac = aa + ab   # legg sammen verdien på kort
+    for x in player_hand[x]:
+        for y in player_hand[x][y]:
+            card_value += y
     player_value = []
     player_value.append(player_hand)  #Lager en ny liste for å vise verdiene på kort
     
