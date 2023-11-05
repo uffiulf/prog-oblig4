@@ -37,20 +37,24 @@ def number_to_word(n):
 
 
 
-#Tar et kort og fjerner det fra listen (hand parameter)  , chatgpt her også
+#Tar et kort og fjerner det fra listen (hand parameter)  ,hjelp fra chatgpt her også
 def deal_hand(deck):
     card = random.choice(deck)
     deck.remove(card)
     return card
 
-#Returnere verdien 10 om bilder finnes i spillerens kort
-def ranks_value(ranks):
-    ranks = ["Jack", "Queen", "King"]
-    for x in ranks:
-        if x == x:
-            return 10
-        else:
-            None
+def value_card(card):
+    value = 0
+    for x in card:
+        if isinstance(x[0], int):    #Sjekker om det er en int, lærte av chatgpt
+            value += x[0]
+        elif card[0] == "Ace":     
+            value += 11 if value <= 21 else 1 
+            return value
+        elif x[0] == "Jack" or x[0] == "Queen" or x[0] == "King":
+            value += 10
+    return value
+        
 
 
 
@@ -89,20 +93,16 @@ while game:
     player_hand.append(deal_hand(deck))
     print(player_hand[0][0])
     print(player_hand[1][0])
-    aa = player_hand[0][0]
-    ab = player_hand[1][0]
-    ac = aa + ab   # legg sammen verdien på kort
-    for x in player_hand[x]:
-        for y in player_hand[x][y]:
-            card_value += y
-    player_value = []
-    player_value.append(player_hand)  #Lager en ny liste for å vise verdiene på kort
+
+    total_value = value_card(player_hand)
+    print("Your total value is:")
+    print(total_value)
     
  
 
 
     
   
-    print(f"You got {player} ")
+    
     dealers_hand.append(deal_hand(deck))
     print(f"Dealer got {dealers_hand[0]}")
