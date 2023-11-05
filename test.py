@@ -33,7 +33,7 @@ def number_to_word(n):
         1: 'Ace', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five',
         6: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine', 10: 'Ten'
     }
-    return(num_words.get(n))
+    return(num_words.get(n))   #Finner match med .get og returnerer verdien
 
 
 
@@ -91,18 +91,33 @@ while game:
     print("Cards have been dealt!")
     player_hand.append(deal_hand(deck))
     player_hand.append(deal_hand(deck))
-    print(player_hand[0][0])
-    print(player_hand[1][0])
+   
+    card_dealt1 =number_to_word(player_hand[0][0])
+    card_dealt2 =number_to_word(player_hand[1][0])
+    print(f"You got dealt {card_dealt1} of {player_hand[0][1]} and {card_dealt2} of {player_hand[1][1]}")
 
     total_value = value_card(player_hand)
-    print("Your total value is:")
-    print(total_value)
-    
- 
-
+    print(f"Your total value is: {total_value}")
+    print(" ")
 
     
-  
-    
+    #dealer kort
     dealers_hand.append(deal_hand(deck))
-    print(f"Dealer got {dealers_hand[0]}")
+    dealers_hand.append(deal_hand(deck))
+    dealers_card1 = number_to_word(dealers_hand[0][0])
+    print(f"The Dealers visible card {dealers_hand[0][0]} of {dealers_hand[0][1]} ")
+
+    while(game):
+        answer = ""
+        if total_value == 21:
+            print("You got 21! You win!")
+            chips += bet * 2
+        elif total_value > 21:
+            print("You got over 21! You lose!")
+        elif answer == "2":
+            player_hand.append(deal_hand(deck))
+            card_dealt3 = number_to_word(player_hand[2][0])
+            print(f"You got dealt {card_dealt3} of {player_hand[2][1]}")
+            total_value = value_card(player_hand)
+            print(f"Your total value is: {total_value}")
+   
